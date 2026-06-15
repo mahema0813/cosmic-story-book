@@ -36,12 +36,21 @@ function renderPage() {
   }
 
   else if (currentPage === "mood") {
-    content.innerHTML = `
-      <h2>🌌 Mood Board</h2>
-      <p>Coming soon: image uploads ✨</p>
-    `;
-  }
+  content.innerHTML = `
+    <h2>🌌 Mood Board</h2>
 
+    <input
+      type="file"
+      id="imageUpload"
+      accept="image/*"
+      multiple
+    >
+
+    <div id="gallery"></div>
+  `;
+
+  setupMoodBoard();
+}
   else if (currentPage === "characters") {
     content.innerHTML = `
       <h2>🎭 Characters</h2>
