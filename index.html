@@ -2,53 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moonveil Stories 🌙</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- cosmic background layer -->
-<div class="sky">
-  <div class="star">⭐</div>
-  <div class="star">🌙</div>
-  <div class="star">✨</div>
-  <div class="star">⭐</div>
-  <div class="star">🌙</div>
-</div>
-
-<!-- BOOK -->
-<div class="book" id="book" onclick="openBook()">
-  <div class="title">
-    Moonveil Stories
-  </div>
-</div>
-
-<!-- OPEN STATE (hidden for now) -->
-<div class="open-book hidden" id="openBook">
-
-  <!-- LEFT PAGE (NAVIGATION) -->
-  <div class="left">
-    <div class="menu-item" onclick="goTo('stories')">📖 Stories</div>
-    <div class="menu-item" onclick="goTo('write')">✍️ Write</div>
-    <div class="menu-item" onclick="goTo('mood')">🌌 Mood Board</div>
-    <div class="menu-item" onclick="goTo('characters')">🎭 Characters</div>
+  <!-- Cosmic background -->
+  <div class="sky">
+    <div class="star">⭐</div>
+    <div class="star">🌙</div>
+    <div class="star">✨</div>
+    <div class="star">⭐</div>
+    <div class="star">🌙</div>
   </div>
 
-  <!-- RIGHT PAGE (CONTENT) -->
-  <div class="right" id="content">
-    <h2>🌙 Welcome to Moonveil</h2>
-    <p>Select a page from the left to begin your story.</p>
+  <!-- Closed Book -->
+  <div class="book" id="book" onclick="openBook()">
+    <div class="title">
+      Moonveil Stories
+    </div>
   </div>
 
-</div>
+  <!-- Open Book -->
+  <div class="open-book hidden" id="openBook">
 
-  <div class="right">
-    <h2>🌙 Welcome to Moonveil</h2>
-    <p>Your story universe begins here.</p>
+    <!-- Left Page / Navigation -->
+    <div class="left">
+      <div class="menu-item" onclick="goTo('stories')">📖 Stories</div>
+      <div class="menu-item" onclick="goTo('write')">✍️ Write</div>
+      <div class="menu-item" onclick="goTo('mood')">🌌 Mood Board</div>
+      <div class="menu-item" onclick="goTo('characters')">🎭 Characters</div>
+    </div>
+
+    <!-- Right Page / Content -->
+    <div class="right" id="content">
+      <h2>🌙 Welcome to Moonveil</h2>
+      <p>Select a page from the left to begin your story.</p>
+    </div>
+
   </div>
-</div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
+
 </body>
 </html>
