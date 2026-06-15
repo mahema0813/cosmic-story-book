@@ -1,141 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Cosmic Story Book 🌙</title>
-
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: radial-gradient(circle at top, #ffd6e8, #c7b7ff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Georgia;
-      overflow: hidden;
-    }
-
-    /* floating stars */
-    .star {
-      position: absolute;
-      color: white;
-      animation: float 6s infinite ease-in-out;
-      opacity: 0.8;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0px); }
-    }
-
-    /* BOOK */
-    .book {
-      width: 260px;
-      height: 340px;
-      background: linear-gradient(145deg, #ffb6d9, #ffcfe8);
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition: transform 0.6s ease, width 0.6s ease;
-      position: relative;
-      text-align: center;
-      color: white;
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    .book:hover {
-      transform: scale(1.05);
-    }
-
-    .book.open {
-      width: 80%;
-      height: 85vh;
-      background: #fff0f8;
-      color: #4b2b3a;
-      cursor: default;
-      flex-direction: row;
-    }
-
-    /* pages layout */
-    .pages {
-      display: none;
-      width: 100%;
-      height: 100%;
-    }
-
-    .book.open .pages {
-      display: flex;
-    }
-
-    .left {
-      width: 30%;
-      border-right: 2px dashed #ff9ac2;
-      padding: 20px;
-    }
-
-    .right {
-      width: 70%;
-      padding: 20px;
-    }
-
-    .menu-item {
-      margin: 15px 0;
-      padding: 10px;
-      background: #ffe0ef;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    .menu-item:hover {
-      background: #ffd1e6;
-    }
-
-    .title {
-      position: absolute;
-    }
-
-    .book.open .title {
-      display: none;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Moonveil Stories 🌙</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- stars -->
-<div class="star" style="top:10%; left:20%">✨</div>
-<div class="star" style="top:30%; left:70%">🌙</div>
-<div class="star" style="top:60%; left:40%">⭐</div>
-<div class="star" style="top:80%; left:10%">✨</div>
+<div id="scene">
 
-<div class="book" onclick="openBook(this)">
-  <div class="title">🌙 Click the Cosmic Book</div>
+  <!-- CLOSED BOOK -->
+  <div id="book" onclick="openBook()">
+    🌙 Welcome to Moonveil Stories
+  </div>
 
-  <div class="pages">
-    <div class="left">
-      <div class="menu-item">📖 Stories</div>
-      <div class="menu-item">✍️ Write</div>
-      <div class="menu-item">🌌 Mood Board</div>
-      <div class="menu-item">🌠 Characters</div>
+  <!-- OPEN BOOK -->
+  <div id="openBook" class="hidden">
+
+    <!-- LEFT PAGE -->
+    <div class="page left">
+      <div class="menu">
+        <div onclick="goTo('stories')">📖 Stories</div>
+        <div onclick="goTo('write')">✍️ Write</div>
+        <div onclick="goTo('mood')">🌌 Mood Board</div>
+        <div onclick="goTo('characters')">🎭 Characters</div>
+      </div>
     </div>
 
-    <div class="right">
-      <h2>✨ Welcome to Moonveil Stories</h2>
+    <!-- RIGHT PAGE -->
+    <div class="page right" id="content">
+      <h2>🌙 Welcome</h2>
       <p>Select a page from the left.</p>
     </div>
+
   </div>
+
 </div>
 
-<script>
-  function openBook(book) {
-    book.classList.add("open");
-  }
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
