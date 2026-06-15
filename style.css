@@ -50,6 +50,8 @@ body {
   background: linear-gradient(145deg, #ff9ecf, #ffc2e3);
   border-radius: 20px;
 
+  border-left: 12px solid #ff7dbd;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,9 +67,10 @@ body {
 }
 
 .title {
-  font-size: 28px;
+  font-size: clamp(24px, 3vw, 42px);
   font-weight: bold;
   color: white;
+  text-align: center;
   text-shadow: 0 0 15px rgba(255,255,255,0.5);
 }
 
@@ -93,13 +96,14 @@ body {
   padding: 30px;
   background: #ffe0ef;
   border-right: 2px dashed #ff8fc7;
+  overflow-y: auto;
 }
 
 .right {
   width: 70%;
   padding: 30px;
+  overflow-y: auto;
 }
-
 /* hidden helper */
 .hidden {
   display: none;
@@ -226,4 +230,33 @@ body {
 
 .character-card h3 {
   margin-top: 0;
+}
+/* 📱 Mobile Support */
+
+@media (max-width: 768px) {
+
+  .book {
+    width: 80vw;
+    height: 60vh;
+  }
+
+  .open-book {
+    width: 95vw;
+    height: 90vh;
+    flex-direction: column;
+  }
+
+  .left {
+    width: auto;
+    border-right: none;
+    border-bottom: 2px dashed #ff8fc7;
+  }
+
+  .right {
+    width: auto;
+  }
+
+  .title {
+    font-size: 28px;
+  }
 }
