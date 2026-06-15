@@ -63,5 +63,59 @@ function renderPage() {
       <h2>🌙 Welcome</h2>
       <p>Select a page from the left.</p>
     `;
+
+    /* 🌌 MOOD BOARD SYSTEM */
+
+function setupMoodBoard() {
+
+  const upload = document.getElementById("imageUpload");
+  const gallery = document.getElementById("gallery");
+
+  let savedImages =
+    JSON.parse(localStorage.getItem("moonveilImages")) || [];
+
+  renderImages(savedImages);
+
+  upload.addEventListener("change", function() {
+
+    const files = upload.files;
+
+    for (let file of files) {
+
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+
+        savedImages.push(e.target.result);
+
+        localStorage.setItem(
+          "moonveilImages",
+          JSON.stringify(savedImages)
+        );
+
+        renderImages(savedImages);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+  function renderImages(images) {
+
+    gallery.innerHTML = "";
+
+    images.forEach(src => {
+
+      const img = document.createElement("img");
+
+      img.src = src;
+
+      gallery.appendChild(img);
+
+    });
+
+  }
+
+}
   }
 }
