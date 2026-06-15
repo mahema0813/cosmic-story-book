@@ -79,12 +79,8 @@ function renderPage() {
   setupMoodBoard();
 }
   else if (currentPage === "characters") {
-    content.innerHTML = `
-      <h2>🎭 Characters</h2>
-      <p>Every soul in Moonveil begins as a sketch of starlight.</p>
-    `;
-  }
-
+  renderCharacters();
+}
   else {
     content.innerHTML = `
       <h2>🌙 Welcome</h2>
