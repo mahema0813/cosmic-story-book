@@ -20,9 +20,75 @@ function renderPage() {
   content.style.animation = "none";
   void content.offsetWidth;
   content.style.animation = "pageFlip 0.5s ease";
+/* 🌌 MOOD BOARD SYSTEM */
 
+function setupMoodBoard() {
+
+  const upload = document.getElementById("imageUpload");
+  const gallery = document.getElementById("gallery");
+
+  let savedImages =
+    JSON.parse(localStorage.getItem("moonveilImages")) || [];
+
+  renderImages(savedImages);
+
+  upload.addEventListener("change", function () {
+
+    const files = upload.files;
+
+    for (let file of files) {
+
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+
+        savedImages.push(e.target.result);
+
+        localStorage.setItem(
+          "moonveilImages",
+          JSON.stringify(savedImages)
+        );
+
+        renderImages(savedImages);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+  function renderImages(images) {
+
+    gallery.innerHTML = "";
+
+    images.forEach((src, index) => {
+
+      gallery.innerHTML += `
+        <div class="image-wrapper">
+          <img src="${src}">
+          <br>
+          <button onclick="deleteImage(${index})">
+            🗑 Delete
+          </button>
+        </div>
+      `;
+    });
+  }
+}
  if (currentPage === "stories") {
   renderStories();
+html += `
+  <div class="story-card">
+
+    <h3 onclick="openStory(${index})" style="cursor:pointer;">
+      🌙 ${story.title}
+    </h3>
+
+    <button onclick="deleteStory(${index})">
+      🗑 Delete
+    </button>
+
+  </div>
+`;
 }
 
   else if (currentPage === "write") {
@@ -80,48 +146,18 @@ function renderPage() {
 }
   else if (currentPage === "characters") {
   renderCharacters();
+<p>${character.description}</p>
+
+<button onclick="deleteCharacter(${index})">
+  🗑 Delete
+</button>
 }
-  else {
-    content.innerHTML = `
-      <h2>🌙 Welcome</h2>
-      <p>Select a page from the left.</p>
-    `;
-
-    /* 🌌 MOOD BOARD SYSTEM */
-
-function setupMoodBoard() {
-
-  const upload = document.getElementById("imageUpload");
-  const gallery = document.getElementById("gallery");
-
-  let savedImages =
-    JSON.parse(localStorage.getItem("moonveilImages")) || [];
-
-  renderImages(savedImages);
-
-  upload.addEventListener("change", function() {
-
-    const files = upload.files;
-
-    for (let file of files) {
-
-      const reader = new FileReader();
-
-      reader.onload = function(e) {
-
-        savedImages.push(e.target.result);
-
-        localStorage.setItem(
-          "moonveilImages",
-          JSON.stringify(savedImages)
-        );
-
-        renderImages(savedImages);
-      };
-
-      reader.readAsDataURL(file);
-    }
-  });
+else {
+  content.innerHTML = `
+    <h2>🌙 Welcome</h2>
+    <p>Select a page from the left.</p>
+  `;
+}
 
   function renderImages(images) {
 
