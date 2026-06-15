@@ -356,3 +356,52 @@ function saveCharacter() {
     renderCharacters();
   }
 }
+function deleteStory(index) {
+  let stories =
+    JSON.parse(localStorage.getItem("moonveilStories")) || [];
+
+  stories.splice(index, 1);
+
+  localStorage.setItem(
+    "moonveilStories",
+    JSON.stringify(stories)
+  );
+
+  renderStories();
+}
+function deleteCharacter(index) {
+
+  let characters =
+    JSON.parse(localStorage.getItem("moonveilCharacters")) || [];
+
+  characters.splice(index, 1);
+
+  localStorage.setItem(
+    "moonveilCharacters",
+    JSON.stringify(characters)
+  );
+
+  renderCharacters();
+}
+function deleteImage(index) {
+
+  let images =
+    JSON.parse(localStorage.getItem("moonveilImages")) || [];
+
+  images.splice(index, 1);
+
+  localStorage.setItem(
+    "moonveilImages",
+    JSON.stringify(images)
+  );
+
+  setupMoodBoard();
+}
+function closeBook() {
+
+  document.getElementById("openBook")
+    .classList.add("hidden");
+
+  document.getElementById("book")
+    .style.display = "flex";
+}
