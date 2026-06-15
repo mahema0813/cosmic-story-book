@@ -164,3 +164,31 @@ body {
 #gallery img:hover {
   transform: scale(1.04);
 }
+.story-card {
+  padding: 15px;
+  margin: 12px 0;
+
+  background: white;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  box-shadow: 0 5px 10px rgba(0,0,0,0.08);
+
+  transition: 0.3s;
+}
+
+.story-card:hover {
+  transform: translateY(-2px);
+}
+
+.story-view {
+  margin-top: 20px;
+
+  line-height: 1.8;
+
+  white-space: normal;
+
+  font-family: "Comic Sans MS", cursive;
+}
