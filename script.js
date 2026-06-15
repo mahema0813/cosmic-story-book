@@ -21,19 +21,46 @@ function renderPage() {
   void content.offsetWidth;
   content.style.animation = "pageFlip 0.5s ease";
 
-  if (currentPage === "stories") {
-    content.innerHTML = `
-      <h2>📖 Stories</h2>
-      <p>Your written worlds will appear here like constellations of memory.</p>
-    `;
-  }
+ if (currentPage === "stories") {
+  renderStories();
+}
 
   else if (currentPage === "write") {
-    content.innerHTML = `
-      <h2>✍️ Write</h2>
-      <textarea style="width:100%; height:70%; border-radius:10px; padding:10px;"></textarea>
-    `;
-  }
+  content.innerHTML = `
+    <h2>✍️ Write</h2>
+
+    <input
+      type="text"
+      id="storyTitle"
+      placeholder="Story Title"
+      style="
+        width:100%;
+        padding:10px;
+        margin-bottom:10px;
+        border-radius:10px;
+      "
+    >
+
+    <textarea
+      id="storyBody"
+      placeholder="Begin your story..."
+      style="
+        width:100%;
+        height:50%;
+        border-radius:10px;
+        padding:15px;
+        font-family:'Comic Sans MS', cursive;
+        font-size:16px;
+      "
+    ></textarea>
+
+    <br><br>
+
+    <button onclick="saveStory()">
+      🌙 Save Story
+    </button>
+  `;
+}
 
   else if (currentPage === "mood") {
   content.innerHTML = `
@@ -118,4 +145,89 @@ function setupMoodBoard() {
 
 }
   }
+}
+/* 🌙 STORY SYSTEM */
+
+function saveStory() {
+
+  const title =
+    document.getElementById("storyTitle").value.trim();
+
+  const body =
+    document.getElementById("storyBody").value.trim();
+
+  if (!title || !body) {
+    alert("Please enter both a title and story.");
+    return;
+  }
+
+  let stories =
+    JSON.parse(localStorage.getItem("moonveilStories")) || [];
+
+  stories.push({
+    title: title,
+    body: body
+  });
+
+  localStorage.setItem(
+    "moonveilStories",
+    JSON.stringify(stories)
+  );
+
+  alert("Story saved 🌙");
+
+  goTo("stories");
+}
+
+function renderStories() {
+
+  const content =
+    document.getElementById("content");
+
+  let stories =
+    JSON.parse(localStorage.getItem("moonveilStories")) || [];
+
+  let html = `
+    <h2>📖 Stories</h2>
+  `;
+
+  if (stories.length === 0) {
+
+    html += `
+      <p>No stories saved yet.</p>
+    `;
+
+  } else {
+
+    stories.forEach((story, index) => {
+
+      html += `
+        <div
+          class="story-card"
+          onclick="openStory(${index})"
+        >
+          🌙 ${story.title}
+        </div>
+      `;
+    });
+
+  }
+
+  content.innerHTML = html;
+}
+
+function openStory(index) {
+
+  const stories =
+    JSON.parse(localStorage.getItem("moonveilStories")) || [];
+
+  const story = stories[index];
+
+  document.getElementById("content").innerHTML = `
+    <h2>${story.title}</h2>
+
+    <div class="story-view">
+      ${story.body.replace(/\n/g, "<br>")}
+    </div>
+  `;
 }
