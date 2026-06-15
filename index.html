@@ -8,34 +8,35 @@
 
 <body>
 
-<div id="scene">
+<!-- cosmic background layer -->
+<div class="sky">
+  <div class="star">⭐</div>
+  <div class="star">🌙</div>
+  <div class="star">✨</div>
+  <div class="star">⭐</div>
+  <div class="star">🌙</div>
+</div>
 
-  <!-- CLOSED BOOK -->
-  <div id="book" onclick="openBook()">
-    🌙 Welcome to Moonveil Stories
+<!-- BOOK -->
+<div class="book" id="book" onclick="openBook()">
+  <div class="title">
+    Moonveil Stories
+  </div>
+</div>
+
+<!-- OPEN STATE (hidden for now) -->
+<div class="open-book hidden" id="openBook">
+  <div class="left">
+    📖 Stories<br>
+    ✍️ Write<br>
+    🌌 Mood Board<br>
+    🎭 Characters
   </div>
 
-  <!-- OPEN BOOK -->
-  <div id="openBook" class="hidden">
-
-    <!-- LEFT PAGE -->
-    <div class="page left">
-      <div class="menu">
-        <div onclick="goTo('stories')">📖 Stories</div>
-        <div onclick="goTo('write')">✍️ Write</div>
-        <div onclick="goTo('mood')">🌌 Mood Board</div>
-        <div onclick="goTo('characters')">🎭 Characters</div>
-      </div>
-    </div>
-
-    <!-- RIGHT PAGE -->
-    <div class="page right" id="content">
-      <h2>🌙 Welcome</h2>
-      <p>Select a page from the left.</p>
-    </div>
-
+  <div class="right">
+    <h2>🌙 Welcome to Moonveil</h2>
+    <p>Your story universe begins here.</p>
   </div>
-
 </div>
 
 <script src="script.js"></script>
