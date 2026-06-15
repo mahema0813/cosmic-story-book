@@ -227,3 +227,132 @@ function openStory(index) {
     </div>
   `;
 }
+/* 🎭 CHARACTER SYSTEM */
+
+function renderCharacters() {
+
+  const content =
+    document.getElementById("content");
+
+  let characters =
+    JSON.parse(localStorage.getItem("moonveilCharacters")) || [];
+
+  let html = `
+    <h2>🎭 Character Snapshots</h2>
+
+    <input
+      type="text"
+      id="characterName"
+      placeholder="Character Name"
+      style="
+        width:100%;
+        padding:10px;
+        margin-bottom:10px;
+        border-radius:10px;
+      "
+    >
+
+    <textarea
+      id="characterDescription"
+      placeholder="Describe your character..."
+      style="
+        width:100%;
+        height:120px;
+        padding:10px;
+        border-radius:10px;
+      "
+    ></textarea>
+
+    <br><br>
+
+    <input
+      type="file"
+      id="characterImage"
+      accept="image/*"
+    >
+
+    <br><br>
+
+    <button onclick="saveCharacter()">
+      🌙 Save Character
+    </button>
+
+    <hr>
+  `;
+
+  characters.forEach((character, index) => {
+
+    html += `
+      <div class="character-card">
+        ${
+          character.image
+          ? `<img src="${character.image}">`
+          : ""
+        }
+
+        <h3>⭐ ${character.name}</h3>
+
+        <p>${character.description}</p>
+      </div>
+    `;
+  });
+
+  content.innerHTML = html;
+}
+function saveCharacter() {
+
+  const name =
+    document.getElementById("characterName").value.trim();
+
+  const description =
+    document.getElementById("characterDescription").value.trim();
+
+  const imageFile =
+    document.getElementById("characterImage").files[0];
+
+  if (!name || !description) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  let characters =
+    JSON.parse(localStorage.getItem("moonveilCharacters")) || [];
+
+  if (imageFile) {
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+      characters.push({
+        name,
+        description,
+        image: e.target.result
+      });
+
+      localStorage.setItem(
+        "moonveilCharacters",
+        JSON.stringify(characters)
+      );
+
+      renderCharacters();
+    };
+
+    reader.readAsDataURL(imageFile);
+
+  } else {
+
+    characters.push({
+      name,
+      description,
+      image: ""
+    });
+
+    localStorage.setItem(
+      "moonveilCharacters",
+      JSON.stringify(characters)
+    );
+
+    renderCharacters();
+  }
+}
