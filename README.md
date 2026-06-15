@@ -1,2 +1,2 @@
-# cosmic-story-book
+# Cosmic Story Book
 A moon themed interactive story book website
