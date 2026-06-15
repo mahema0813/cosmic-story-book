@@ -3,6 +3,8 @@
 ========================== */
 
 let currentPage = "home";
+let editingStoryIndex = null;
+let editingCharacterIndex = null;
 
 /* ==========================
    📕 BOOK CONTROLS
@@ -127,10 +129,24 @@ function saveStory() {
       localStorage.getItem("moonveilStories")
     ) || [];
 
+if (editingStoryIndex !== null) {
+
+  stories[editingStoryIndex] = {
+    title,
+    body
+  };
+
+  editingStoryIndex = null;
+
+} else {
+
   stories.push({
     title,
     body
   });
+
+}
+   
 
   localStorage.setItem(
     "moonveilStories",
@@ -201,20 +217,46 @@ function openStory(index) {
 
   let story = stories[index];
 
-  document.getElementById("content").innerHTML = `
-    <h2>${story.title}</h2>
+document.getElementById("content").innerHTML = `
+  <h2>${story.title}</h2>
 
-    <div class="story-view">
-      ${story.body.replace(/\n/g, "<br>")}
-    </div>
+  <div class="story-view">
+    ${story.body.replace(/\n/g, "<br>")}
+  </div>
 
-    <br>
+  <br>
 
-    <button onclick="goTo('stories')">
-      📖 Back
-    </button>
-  `;
+  <button onclick="editStory(${index})">
+    ✏️ Edit
+  </button>
+
+  <button onclick="goTo('stories')">
+    📖 Back
+  </button>
+ `;
 }
+function editStory(index) {
+
+  let stories =
+    JSON.parse(
+      localStorage.getItem("moonveilStories")
+    ) || [];
+
+  let story = stories[index];
+
+  editingStoryIndex = index;
+
+  currentPage = "write";
+
+  renderPage();
+
+  document.getElementById("storyTitle").value =
+    story.title;
+
+  document.getElementById("storyBody").value =
+    story.body;
+}
+
 
 function deleteStory(index) {
 
@@ -387,11 +429,17 @@ function renderCharacters() {
           ${character.description}
         </p>
 
-        <button
-          onclick="deleteCharacter(${index})"
-        >
-          🗑 Delete
-        </button>
+<button
+  onclick="editCharacter(${index})"
+>
+  ✏️ Edit
+</button>
+
+<button
+  onclick="deleteCharacter(${index})"
+>
+  🗑 Delete
+</button>
 
       </div>
     `;
@@ -437,12 +485,52 @@ function saveCharacter() {
 
     reader.onload = function (e) {
 
-      characters.push({
-        name,
-        description,
-        image: e.target.result
-      });
+if (editingCharacterIndex !== null) {
 
+  const oldImage =
+    characters[editingCharacterIndex].image;
+
+  characters[editingCharacterIndex] = {
+    name,
+    description,
+    image: oldImage
+  };
+
+  editingCharacterIndex = null;
+
+} else {
+
+  characters.push({
+    name,
+    description,
+    image: ""
+  });
+
+}
+       
+function editCharacter(index) {
+
+  let characters =
+    JSON.parse(
+      localStorage.getItem(
+        "moonveilCharacters"
+      )
+    ) || [];
+
+  let character = characters[index];
+
+  editingCharacterIndex = index;
+
+  renderCharacters();
+
+  document.getElementById(
+    "characterName"
+  ).value = character.name;
+
+  document.getElementById(
+    "characterDescription"
+  ).value = character.description;
+}
       localStorage.setItem(
         "moonveilCharacters",
         JSON.stringify(characters)
