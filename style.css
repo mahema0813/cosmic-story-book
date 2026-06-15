@@ -138,3 +138,29 @@ body {
     filter: blur(0);
   }
 }
+/* 🌌 Mood Board Gallery */
+
+#gallery {
+  margin-top: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+#gallery img {
+  width: 100%;
+  height: 140px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+
+  transition: 0.3s;
+}
+
+#gallery img:hover {
+  transform: scale(1.04);
+}
