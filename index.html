@@ -26,12 +26,22 @@
 
 <!-- OPEN STATE (hidden for now) -->
 <div class="open-book hidden" id="openBook">
+
+  <!-- LEFT PAGE (NAVIGATION) -->
   <div class="left">
-    📖 Stories<br>
-    ✍️ Write<br>
-    🌌 Mood Board<br>
-    🎭 Characters
+    <div class="menu-item" onclick="goTo('stories')">📖 Stories</div>
+    <div class="menu-item" onclick="goTo('write')">✍️ Write</div>
+    <div class="menu-item" onclick="goTo('mood')">🌌 Mood Board</div>
+    <div class="menu-item" onclick="goTo('characters')">🎭 Characters</div>
   </div>
+
+  <!-- RIGHT PAGE (CONTENT) -->
+  <div class="right" id="content">
+    <h2>🌙 Welcome to Moonveil</h2>
+    <p>Select a page from the left to begin your story.</p>
+  </div>
+
+</div>
 
   <div class="right">
     <h2>🌙 Welcome to Moonveil</h2>
